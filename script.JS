@@ -33,38 +33,38 @@ function updateBoard() {
         if (currentGuess[i] === correctWord[i]) {
             cells[i].classList.add('correct');
             correct++;
-        } else if(correctWord.includes(currentGuess[i])){
-            cells[i].classList.add('present')
-        }else{
-            cells[i].classList.add('absent')
+        } else if (correctWord.includes(currentGuess[i])) {
+            cells[i].classList.add('present');
+        } else {
+            cells[i].classList.add('absent');
         }
     }
-    if(correct=== 5){
-        message.textContent = 'wow you dont suck your good'
-        submit.disable = true
-    }else if(guessCount === maxGuesses - 1){
-        message.textContent = 'try again the word was${correctWord}.'
-        submit.disable = true
-    }else{
-        guessCount++
+
+    if (correct === 5) {
+        message.textContent = 'Congratulations!';
+        submit.disabled = true;
+    } else if (guessCount === maxGuesses - 1) {
+        message.textContent = `Game over! The word was ${correctWord}.`;
+        submit.disabled = true;
+    } else {
+        guessCount++;
     }
 }
 
-
-submit.addEventListener('click', function(){
-    currentGuess = Input.value.toUpperCase()
-    if(currentGuess.length === 5){
-        updateBoard()
-        Input.value = ''
-    }else{
-        alert('Make it be 5 letters please.')
+submit.addEventListener('click', function() {
+    currentGuess = input.value.toUpperCase();
+    if (currentGuess.length === 5) {
+        updateBoard();
+        input.value = ''; // Clear input after guess
+    } else {
+        alert('Word must be 5 letters!');
     }
-})
+});
 
-input.addEventListener('keyup', function(event){
-    if(event.key === 'Enter'){
-        submit.click()
+input.addEventListener('keyup', function(event) {
+    if (event.key === "Enter") {
+        submit.click();
     }
-})
+});
 
-initializeBoard()
+initializeBoard();
